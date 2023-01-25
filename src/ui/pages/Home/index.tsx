@@ -38,12 +38,19 @@ export function Home () {
   }, [])
 
   return (
-    <Container>
+    <>
       <Box
         sx={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
+          position: 'sticky',
+          top: 0,
+          background: 'white',
+          padding: '1rem 0',
+          zIndex: 10,
+          borderBottom: '1px solid lightgray',
+          paddingX: '3rem'
         }}
       >
         <TextField
@@ -55,7 +62,6 @@ export function Home () {
                   <MagnifyingGlass size={24} color="#828282" />
                 </InputAdornment>
             }}
-            sx={{ margin: '2rem 0' }}
             onChange={(e) => { setSearchInput(e.target.value) }}
           />
           <Button variant='outlined'>
@@ -64,22 +70,30 @@ export function Home () {
             </Badge>
           </Button>
       </Box>
-      <Grid justifyContent='center' alignItems='flex-start' container rowSpacing={8} columnSpacing={2}>
-        {filtered.map((it, i) => (
-          <Grid item key={i} xs={12} sm={6} md={4}>
-            <ProductCard
-              brand={it.brand}
-              price={it.price}
-              rating={it.rating}
-              thumbnail={it.thumbnail}
-              title={it.title}
-              onClick={() => {
-                h.addToCart(it)
-              }}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+      <Container>
+        <Grid
+          justifyContent='center'
+          alignItems='flex-start'
+          container
+          rowSpacing={8}
+          columnSpacing={2}
+        >
+          {filtered.map((it, i) => (
+            <Grid item key={i} xs={12} sm={6} md={4}>
+              <ProductCard
+                brand={it.brand}
+                price={it.price}
+                rating={it.rating}
+                thumbnail={it.thumbnail}
+                title={it.title}
+                onClick={() => {
+                  h.addToCart(it)
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </>
   )
 }
