@@ -1,10 +1,13 @@
+import { BrowserRouter } from 'react-router-dom'
 import { CartContextProvider } from './ui/hooks/useCart'
-import { Home } from './ui/pages/Home'
+import { Router } from './ui/routes/Router'
 
 export function App () {
   return (
     <CartContextProvider>
-      <Home />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
     </CartContextProvider>
   )
 }
