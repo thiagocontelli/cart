@@ -1,3 +1,10 @@
+import { CartContextProvider } from './ui/hooks/useCart'
+import { Home } from './ui/pages/Home'
+
 export function App () {
-  return <h1>Hello World!</h1>
+  return (
+    <CartContextProvider>
+      <Home />
+    </CartContextProvider>
+  )
 }
