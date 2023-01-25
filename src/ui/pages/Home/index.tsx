@@ -13,6 +13,7 @@ const useCase = new GetAllProducts(repo)
 
 export function Home () {
   const [products, setProducts] = useState<Product[]>([])
+  const [searchInput, setSearchInput] = useState('')
 
   async function getAll () {
     try {
@@ -22,6 +23,12 @@ export function Home () {
       alert('deu erro')
     }
   }
+
+  const filtered = products.filter(it => {
+    if (searchInput.trim() === '') return it
+
+    return it.title.toLowerCase().trim().match(searchInput.toLowerCase().trim())
+  })
 
   useEffect(() => {
     getAll()
@@ -40,6 +47,7 @@ export function Home () {
                 </InputAdornment>
             }}
             sx={{ margin: '2rem 0' }}
+            onChange={(e) => { setSearchInput(e.target.value) }}
           />
           <Button variant='outlined'>
             <Badge badgeContent={1} color='error'>
@@ -48,7 +56,7 @@ export function Home () {
           </Button>
       </Box>
       <Grid justifyContent='center' alignItems='flex-start' container rowSpacing={8} columnSpacing={2}>
-        {products.map((it, i) => (
+        {filtered.map((it, i) => (
           <Grid item key={i} xs={12} sm={6} md={4}>
             <ProductCard
               brand={it.brand}
