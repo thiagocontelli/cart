@@ -1,31 +1,13 @@
 import { Badge, Box, Button, Container, Grid, InputAdornment, TextField } from '@mui/material'
 import { MagnifyingGlass, ShoppingCart } from 'phosphor-react'
-import { useEffect, useState } from 'react'
-import { ProductRepository } from '../../../data/ProductRepository'
-import { GetAllProducts } from '../../../domain/useCases/implementation/GetAllProducts'
-import { Product } from '../../../model/Product'
-import { HttpService } from '../../../services/http'
+import { useEffect } from 'react'
 import { ProductCard } from '../../components/ProductCard'
 import { useCart } from '../../hooks/useCart'
-
-const http = new HttpService()
-const repo = new ProductRepository(http)
-const useCase = new GetAllProducts(repo)
+import { useHome } from './useHome'
 
 export function Home () {
-  const [products, setProducts] = useState<Product[]>([])
-  const [searchInput, setSearchInput] = useState('')
-
   const h = useCart()
-
-  async function getAll () {
-    try {
-      const products = await useCase.execute()
-      setProducts(products)
-    } catch (error) {
-      alert('deu erro')
-    }
-  }
+  const { getAll, products, searchInput, setSearchInput } = useHome()
 
   const filtered = products.filter(it => {
     if (searchInput.trim() === '') return it
