@@ -16,6 +16,8 @@ export function CartContextProvider ({ children }: Props) {
   const [cart, setCart] = useState<Product[]>([])
 
   function addToCart (product: Product) {
+    const productExists = cart.find(it => it.id === product.id)
+    if (productExists) return
     setCart(prevState => [...prevState, product])
   }
 
