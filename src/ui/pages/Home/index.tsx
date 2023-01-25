@@ -6,6 +6,7 @@ import { GetAllProducts } from '../../../domain/useCases/implementation/GetAllPr
 import { Product } from '../../../model/Product'
 import { HttpService } from '../../../services/http'
 import { ProductCard } from '../../components/ProductCard'
+import { useCart } from '../../hooks/useCart'
 
 const http = new HttpService()
 const repo = new ProductRepository(http)
@@ -14,6 +15,8 @@ const useCase = new GetAllProducts(repo)
 export function Home () {
   const [products, setProducts] = useState<Product[]>([])
   const [searchInput, setSearchInput] = useState('')
+
+  const h = useCart()
 
   async function getAll () {
     try {
@@ -36,7 +39,13 @@ export function Home () {
 
   return (
     <Container>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+      >
         <TextField
             label="Search Product"
             placeholder='Search product by name . . .'
@@ -50,7 +59,7 @@ export function Home () {
             onChange={(e) => { setSearchInput(e.target.value) }}
           />
           <Button variant='outlined'>
-            <Badge badgeContent={1} color='error'>
+            <Badge badgeContent={h.cart.length} color='error'>
               <ShoppingCart size={32} color="#1976d2" weight="fill" />
             </Badge>
           </Button>
@@ -64,6 +73,9 @@ export function Home () {
               rating={it.rating}
               thumbnail={it.thumbnail}
               title={it.title}
+              onClick={() => {
+                h.addToCart(it)
+              }}
             />
           </Grid>
         ))}
