@@ -30,7 +30,7 @@ export function ProductCard ({ brand, price, rating, title, thumbnail, onClick }
         <Typography variant='h5' marginTop='1rem'>{currencyConverter(price)}</Typography>
         <Typography marginTop='1rem' sx={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Star size={20} color="#d4af37" weight="fill" />
-          {rating}
+          {rating.toFixed(2)}
         </Typography>
       </CardContent>
       <CardActions>
