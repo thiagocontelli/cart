@@ -11,9 +11,10 @@ interface ProductCardProps {
   price: number
   rating: number
   thumbnail: string
+  onClick: () => void
 }
 
-export function ProductCard ({ brand, price, rating, title, thumbnail }: ProductCardProps) {
+export function ProductCard ({ brand, price, rating, title, thumbnail, onClick }: ProductCardProps) {
   const currencyConverter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format
 
   return (
@@ -36,6 +37,7 @@ export function ProductCard ({ brand, price, rating, title, thumbnail }: Product
         <Button
           variant='contained'
           fullWidth
+          onClick={onClick}
         >
           add to cart +
         </Button>
