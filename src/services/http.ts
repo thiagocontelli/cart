@@ -4,12 +4,12 @@ export const api = axios.create({
   baseURL: 'https://dummyjson.com'
 })
 
-interface IHttpResponse {
+export interface IHttpResponse {
   status: number
   data: any
 }
 
-interface IHttpService {
+export interface IHttpService {
   get: (url: string, config?: AxiosRequestConfig) => Promise<IHttpResponse>
 }
 
