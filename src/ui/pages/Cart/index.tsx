@@ -1,5 +1,5 @@
 import { Box, Button, Container, Typography } from '@mui/material'
-import { SmileySad } from 'phosphor-react'
+import { ArrowLeft, SmileySad } from 'phosphor-react'
 import { CartCard } from '../../components/CartCard'
 import { Path } from '../../enum/Path'
 import { currencyConverter } from '../../helper/currencyConverter'
@@ -10,11 +10,22 @@ export function Cart () {
   const h = useCart()
   const { navigate } = useNavigation()
 
+  function goToHome () {
+    navigate(Path.Home)
+  }
+
   return (
     <>
       {h.cart.length > 0
         ? (
         <Container>
+          <Button
+            startIcon={<ArrowLeft size={24} color="#1976d2" />}
+            onClick={goToHome}
+            sx={{ margin: '2rem 0' }}
+          >
+            back to home page
+          </Button>
           {h.cart.map((it, i) => (
             <Box key={i}>
               <CartCard
@@ -42,7 +53,7 @@ export function Cart () {
         >
           <SmileySad size={128} color="#828282" />
           <Typography textAlign='center' fontSize={24} marginBottom='3rem'>Cart is empty</Typography>
-          <Button variant='contained' onClick={() => { navigate(Path.Home) }}>
+          <Button variant='contained' onClick={goToHome}>
             back to home page
           </Button>
         </Container>
