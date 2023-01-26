@@ -36,7 +36,18 @@ export function Cart () {
               <div style={{ padding: '1rem' }}></div>
             </Box>
           ))}
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              position: 'sticky',
+              bottom: 0,
+              background: 'white',
+              padding: '1rem 0',
+              zIndex: 10,
+              borderTop: '1px solid lightgray'
+            }}
+          >
             <Typography variant='h5'>Total: {currencyConverter(500)}</Typography>
           </Box>
         </Container>
