@@ -1,6 +1,6 @@
 export function currencyConverter (value: number): string {
   return new Intl.NumberFormat(
-    'pt-BR',
-    { style: 'currency', currency: 'BRL' })
+    'en-US',
+    { style: 'currency', currency: 'USD' })
     .format(value)
 }
