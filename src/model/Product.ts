@@ -5,6 +5,7 @@ export class Product {
     readonly price: number,
     readonly rating: number,
     readonly brand: string,
-    readonly thumbnail: string
+    readonly thumbnail: string,
+    readonly amount: number = 0
   ) {}
 }
