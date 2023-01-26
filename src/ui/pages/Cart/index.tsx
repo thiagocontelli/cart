@@ -9,6 +9,8 @@ import { useNavigation } from '../../hooks/useNavigation'
 export function Cart () {
   const h = useCart()
   const { navigate } = useNavigation()
+  const prices = h.cart.map(it => it.price * it.amount)
+  const total = prices.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
 
   function goToHome () {
     navigate(Path.Home)
@@ -48,7 +50,7 @@ export function Cart () {
               borderTop: '1px solid lightgray'
             }}
           >
-            <Typography variant='h5'>Total: {currencyConverter(500)}</Typography>
+            <Typography variant='h5'>Total: {currencyConverter(total)}</Typography>
           </Box>
         </Container>
           )
