@@ -2,12 +2,15 @@ import { Badge, Box, Button, Container, Grid, InputAdornment, TextField } from '
 import { MagnifyingGlass, ShoppingCart } from 'phosphor-react'
 import { useEffect } from 'react'
 import { ProductCard } from '../../components/ProductCard'
+import { Path } from '../../enum/Path'
 import { useCart } from '../../hooks/useCart'
+import { useNavigation } from '../../hooks/useNavigation'
 import { useHome } from './useHome'
 
 export function Home () {
   const h = useCart()
   const { getAll, products, searchInput, setSearchInput } = useHome()
+  const { navigate } = useNavigation()
 
   const filtered = products.filter(it => {
     if (searchInput.trim() === '') return it
@@ -46,7 +49,7 @@ export function Home () {
             }}
             onChange={(e) => { setSearchInput(e.target.value) }}
           />
-          <Button variant='outlined'>
+          <Button variant='outlined' onClick={() => { navigate(Path.Cart) }}>
             <Badge badgeContent={h.cart.length} color='error'>
               <ShoppingCart size={32} color="#1976d2" weight="fill" />
             </Badge>
