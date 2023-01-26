@@ -21,7 +21,7 @@ export function CartCard ({ product }: CartCardProps) {
             <IconButton>
               <Minus size={20} color="#000000" weight="fill" />
             </IconButton>
-            <Typography>10</Typography>
+            <Typography>{product.amount}</Typography>
             <IconButton>
               <Plus size={20} color="#000000" weight="fill" />
             </IconButton>
