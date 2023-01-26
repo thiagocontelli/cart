@@ -5,9 +5,11 @@ import { currencyConverter } from '../helper/currencyConverter'
 
 interface CartCardProps {
   product: Product
+  onClickMinus: () => void
+  onClickPlus: () => void
 }
 
-export function CartCard ({ product }: CartCardProps) {
+export function CartCard ({ product, onClickMinus, onClickPlus }: CartCardProps) {
   return (
     <Card>
       <CardHeader
@@ -18,11 +20,11 @@ export function CartCard ({ product }: CartCardProps) {
         subheader={currencyConverter(product.price)}
         action={
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <IconButton>
+            <IconButton onClick={onClickMinus}>
               <Minus size={20} color="#000000" weight="fill" />
             </IconButton>
             <Typography>{product.amount}</Typography>
-            <IconButton>
+            <IconButton onClick={onClickPlus}>
               <Plus size={20} color="#000000" weight="fill" />
             </IconButton>
           </div>

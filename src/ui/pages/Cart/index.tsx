@@ -17,7 +17,11 @@ export function Cart () {
         <Container>
           {h.cart.map((it, i) => (
             <Box key={i}>
-              <CartCard product={it} />
+              <CartCard
+                product={it}
+                onClickMinus={() => { h.decreaseAmount(it) }}
+                onClickPlus={() => { h.increaseAmount(it) }}
+              />
               <div style={{ padding: '1rem' }}></div>
             </Box>
           ))}

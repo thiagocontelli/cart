@@ -4,6 +4,8 @@ import { Product } from '../../model/Product'
 interface CartContextType {
   cart: Product[]
   addToCart: (product: Product) => void
+  increaseAmount: (product: Product) => void
+  decreaseAmount: (product: Product) => void
 }
 
 interface Props {
@@ -31,11 +33,37 @@ export function CartContextProvider ({ children }: Props) {
     setCart(prevState => [...prevState, { ...product, amount: 1 }])
   }
 
+  function increaseAmount (product: Product) {
+    setCart(prevState =>
+      prevState.map(it => {
+        if (it.id === product.id) {
+          return { ...product, amount: product.amount + 1 }
+        }
+        return it
+      })
+    )
+  }
+
+  function decreaseAmount (product: Product) {
+    if (product.amount > 0) {
+      setCart(prevState =>
+        prevState.map(it => {
+          if (it.id === product.id) {
+            return { ...product, amount: product.amount - 1 }
+          }
+          return it
+        })
+      )
+    }
+  }
+
   return (
     <CartContext.Provider
       value={{
         cart,
-        addToCart
+        addToCart,
+        decreaseAmount,
+        increaseAmount
       }}
     >
       {children}
