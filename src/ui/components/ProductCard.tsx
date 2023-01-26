@@ -4,6 +4,7 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import { Star } from 'phosphor-react'
+import { currencyConverter } from '../helper/currencyConverter'
 
 interface ProductCardProps {
   title: string
@@ -15,8 +16,6 @@ interface ProductCardProps {
 }
 
 export function ProductCard ({ brand, price, rating, title, thumbnail, onClick }: ProductCardProps) {
-  const currencyConverter = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format
-
   return (
     <Card sx={{ maxWidth: '300px' }}>
       <CardMedia
