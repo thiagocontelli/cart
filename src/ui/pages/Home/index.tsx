@@ -39,23 +39,23 @@ export function Home () {
         }}
       >
         <TextField
-            label="Search Product"
-            placeholder='Search product by name . . .'
-            InputProps={{
-              startAdornment:
-                <InputAdornment position='start'>
-                  <MagnifyingGlass size={24} color="#828282" />
-                </InputAdornment>
-            }}
-            onChange={(e) => { setSearchInput(e.target.value) }}
-          />
-          <Button variant='outlined' onClick={() => { navigate(Path.Cart) }}>
-            <Badge badgeContent={h.cart.length} color='error'>
-              <ShoppingCart size={32} color="#1976d2" weight="fill" />
-            </Badge>
-          </Button>
+          label="Search Product"
+          placeholder='Search product by name . . .'
+          InputProps={{
+            startAdornment:
+              <InputAdornment position='start'>
+                <MagnifyingGlass size={24} color="#828282" />
+              </InputAdornment>
+          }}
+          onChange={(e) => { setSearchInput(e.target.value) }}
+        />
+        <Button variant='outlined' onClick={() => { navigate(Path.Cart) }}>
+          <Badge badgeContent={h.cart.length} color='error'>
+            <ShoppingCart size={32} color="#1976d2" weight="fill" />
+          </Badge>
+        </Button>
       </Box>
-      <Container>
+      <Container sx={{ marginTop: '2rem' }}>
         <Grid
           justifyContent='center'
           alignItems='flex-start'
