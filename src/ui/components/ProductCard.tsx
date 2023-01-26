@@ -28,7 +28,7 @@ export function ProductCard ({ brand, price, rating, title, thumbnail, onClick }
     >
       <Box>
         <CardMedia
-          sx={{ maxHeight: '200px', objectFit: 'cover' }}
+          sx={{ height: '250px', objectFit: 'cover' }}
           component='img'
           image={thumbnail}
         />

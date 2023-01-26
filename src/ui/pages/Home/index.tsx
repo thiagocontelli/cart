@@ -64,7 +64,7 @@ export function Home () {
           columnSpacing={2}
         >
           {filtered.map((it, i) => (
-            <Grid item key={i} xs={12} sm={6} md={4}>
+            <Grid item key={i} xs={12} sm={6} md={3}>
               <ProductCard
                 brand={it.brand}
                 price={it.price}
