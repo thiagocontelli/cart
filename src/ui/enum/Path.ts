@@ -1,3 +1,4 @@
 export enum Path {
-  Cart = '/cart'
+  Cart = '/cart',
+  Home = '/'
 }
