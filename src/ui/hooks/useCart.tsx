@@ -45,7 +45,7 @@ export function CartContextProvider ({ children }: Props) {
   }
 
   function decreaseAmount (product: Product) {
-    if (product.amount > 0) {
+    if (product.amount > 1) {
       setCart(prevState =>
         prevState.map(it => {
           if (it.id === product.id) {
@@ -54,7 +54,10 @@ export function CartContextProvider ({ children }: Props) {
           return it
         })
       )
+      return
     }
+    const newCart = cart.filter(it => it.id !== product.id)
+    setCart(newCart)
   }
 
   return (
