@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { ProductRepository } from '../../../data/ProductRepository'
 import { GetAllProducts } from '../../../domain/useCases/implementation/GetAllProducts'
 import { Product } from '../../../model/Product'
@@ -17,7 +18,7 @@ export function useHome () {
       const products = await useCase.execute()
       setProducts(products)
     } catch (error) {
-      alert('deu erro')
+      toast.error('Tivemos um problema.')
     }
   }
 
