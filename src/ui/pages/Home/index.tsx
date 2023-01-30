@@ -34,8 +34,7 @@ export function Home () {
           background: 'white',
           padding: '1rem 0',
           zIndex: 10,
-          borderBottom: '1px solid lightgray',
-          paddingX: '3rem'
+          borderBottom: '1px solid lightgray'
         }}
       >
         <TextField
