@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { Product } from '../../model/Product'
 
 interface CartContextType {
@@ -16,32 +16,35 @@ const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider ({ children }: Props) {
   const [cart, setCart] = useState<Product[]>([])
+  const LS_CART = 'cart'
 
   function addToCart (product: Product) {
     const productExists = cart.find(it => it.id === product.id)
     if (productExists) {
-      setCart(prevState =>
-        prevState.map(it => {
-          if (it.id === productExists.id) {
-            return { ...productExists, amount: productExists.amount + 1 }
-          }
-          return it
-        })
-      )
-      return
-    }
-    setCart(prevState => [...prevState, { ...product, amount: 1 }])
-  }
-
-  function increaseAmount (product: Product) {
-    setCart(prevState =>
-      prevState.map(it => {
-        if (it.id === product.id) {
-          return { ...product, amount: product.amount + 1 }
+      const newCart = cart.map(it => {
+        if (it.id === productExists.id) {
+          return { ...productExists, amount: productExists.amount + 1 }
         }
         return it
       })
-    )
+      setCart(newCart)
+      addCartToLocalStorage(newCart)
+      return
+    }
+    const newCart = [...cart, { ...product, amount: 1 }]
+    setCart(newCart)
+    addCartToLocalStorage(newCart)
+  }
+
+  function increaseAmount (product: Product) {
+    const newCart = cart.map(it => {
+      if (it.id === product.id) {
+        return { ...product, amount: product.amount + 1 }
+      }
+      return it
+    })
+    setCart(newCart)
+    addCartToLocalStorage(newCart)
   }
 
   function decreaseAmount (product: Product) {
@@ -58,7 +61,19 @@ export function CartContextProvider ({ children }: Props) {
     }
     const newCart = cart.filter(it => it.id !== product.id)
     setCart(newCart)
+    addCartToLocalStorage(newCart)
   }
+
+  function addCartToLocalStorage (cart: Product[]) {
+    localStorage.setItem(LS_CART, JSON.stringify(cart))
+  }
+
+  useEffect(() => {
+    const lsCart = localStorage.getItem(LS_CART)
+    if (lsCart) {
+      setCart(JSON.parse(lsCart))
+    }
+  }, [])
 
   return (
     <CartContext.Provider
